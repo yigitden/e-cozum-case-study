@@ -11,7 +11,7 @@ const PackageCard = ({ card }) => {
 
   const addPackage = (id, name, amount) => {
     dispatch(addPackagetoBasket({ id, name, amount }));
-    setIsSelected(true);
+    setIsSelected(!isSelected);
   };
 
   return (
