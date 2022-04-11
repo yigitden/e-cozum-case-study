@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PackageList from "./pages/PackageList";
 import Payment from "./pages/Payment";
 import ResultPayment from "./pages/ResultPayment"; 
-import Deneme from "./Deneme"; 
+
 
 
 function App() { 
@@ -29,10 +29,6 @@ function App() {
         element={<ResultPayment/>}
       />
     
-    <Route
-        path="deneme"
-        element={<Deneme/>}
-      />
     </Routes>
   </BrowserRouter>
      
