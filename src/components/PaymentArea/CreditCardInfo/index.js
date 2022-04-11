@@ -68,7 +68,7 @@ const CreditCardInfo = () => {
             CVV/CVC
             <Input.Password
               name="cvv"
-              maxLength={3}
+              maxLength={4}
               onChange={handleChange}
               placeholder="CVV/CVC"
               iconRender={(visible) =>
