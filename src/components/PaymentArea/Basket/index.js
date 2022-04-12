@@ -1,4 +1,4 @@
-import { Typography, Space } from "antd";
+import { Typography } from "antd";
 import { Button } from "antd";
 import { useAppSelector } from "../../../store";
 
@@ -25,8 +25,8 @@ const Basket = () => {
   return (
     <div className="basket">
       {packagesInBasket &&
-        packagesInBasket.map((packages) => (
-          <div className="packageInTheBasket">
+        packagesInBasket.map((packages,index) => (
+          <div className="packageInTheBasket" key={index} >
             <Text>{packages.name}</Text>
             <Text strong>{packages.amount} ₺</Text>
           </div>

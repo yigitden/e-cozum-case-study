@@ -5,7 +5,7 @@ const Details = ({ card }) => {
     
       <div className="details">
         {card &&
-          card.details.map((detail) => <Badge color="blue" text={detail} />)}
+          card.details.map((detail,index) => <Badge color="blue" text={detail} key={index} />)}
       </div>
      
   );
