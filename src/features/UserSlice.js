@@ -8,7 +8,7 @@ const initialState = {
   error: "",
 };
 
-export const addUser = createAsyncThunk("addUser", async (values) => {
+export const addUser = createAsyncThunk("signup", async (values) => {
   const response = await Api().post("signup", values);
   return response.data;
 });
