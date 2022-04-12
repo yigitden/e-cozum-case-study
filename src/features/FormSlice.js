@@ -8,13 +8,10 @@ const FormSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    addFormInformation : (state, action) => {
-         
-        state.data.push(action.payload);  
-        console.log(state.data)
-    },
+    addFormInformation: (state, action) => {
+      state.data.push(action.payload) 
   },
-});
+}})
 
 export default FormSlice.reducer;
 export const { addFormInformation } = FormSlice.actions;

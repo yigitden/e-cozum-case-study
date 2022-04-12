@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Input, Space } from "antd";
 import { addFormInformation } from "../../../features/FormSlice";
-import { useAppDispatch } from "../../../store";
-import Cleave from "cleave.js/react";
+import { useAppDispatch, useAppSelector } from "../../../store";
+import Cleave from "cleave.js/react"; 
 
 const CreditCardInfo = () => {
   const dispatch = useAppDispatch();
-  const initialValues = {
-    cardHolderName: "",
-    cardNumber: "",
-    expireDate: "",
-    cvv: "",
-  };
-  const [cardForm, setCardForm] = useState(initialValues);
+  
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCardForm({ ...cardForm, [name]: value });
-    dispatch(addFormInformation(cardForm));
-  };
 
-  const onCreditCardChange = (event) => {
-    // formatted pretty value
-    console.log(event.target.value);
-
-    // raw value
-    console.log(event.target.rawValue);
-  };
+    const [cardHolderName,setCardHolderName] = useState('')
+    const [cardNumber,setCardNumber] = useState('')
+    const [expireDate,setExpireDate] = useState('')
+    const [cvv,setCvv] = useState('')
+   
+    const initialValues = {
+      cardHolderName: cardHolderName,
+      cardNumber: cardNumber,
+      expireDate: expireDate,
+      cvv: cvv,
+    };
+    
+   
+    useEffect(()=>{
+      dispatch(addFormInformation(initialValues))
+      
+    },[initialValues]) 
 
   return (
     <>
@@ -37,7 +36,7 @@ const CreditCardInfo = () => {
             Kartın Üzerindeki İsim Soyisim
             <Input
               placeholder="Kartın Üzerindeki İsim Soyisim"
-              onChange={handleChange}
+              onChange={(e) => setCardHolderName(e.target.value)}
               name="cardHolderName"
             />
           </Space>
@@ -50,7 +49,7 @@ const CreditCardInfo = () => {
               name="cardNumber"
               className="ant-input"
               options={{ creditCard: true }}
-              onChange={onCreditCardChange}
+              onChange={(e) => setCardNumber(e.target.rawValue)}
             />
           </Space>
           <Space direction="vertical">
@@ -60,7 +59,7 @@ const CreditCardInfo = () => {
               name="expireDate"
               className="ant-input"
               options={{ date: true, datePattern: ["m", "y"] }}
-              onChange={onCreditCardChange}
+              onChange={(e) => setExpireDate(e.target.value)}
             />
           </Space>
 
@@ -69,7 +68,7 @@ const CreditCardInfo = () => {
             <Input.Password
               name="cvv"
               maxLength={4}
-              onChange={handleChange}
+              onChange={(e) => setCvv(e.target.value)}
               placeholder="CVV/CVC"
               iconRender={(visible) =>
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />

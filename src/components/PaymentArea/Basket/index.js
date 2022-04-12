@@ -1,8 +1,9 @@
 import { Typography } from "antd";
 import { Button } from "antd";
 import { useAppSelector } from "../../../store";
-
 import { useNavigate } from "react-router";
+import Api from "../../../service/Api";
+
 const Basket = () => {
   let navigate = useNavigate();
   const { Text } = Typography;
@@ -16,16 +17,28 @@ const Basket = () => {
     return count;
   };
 
+  const packageIds = packagesInBasket.map((item) => String(item.id))
+  const paymentForm = useAppSelector((state) => state.form)
+  
   const addPayment = () => {
-    navigate("/result");
+    const allInformationsToPayment = {
+      ...paymentForm.data[paymentForm.data.length - 1],
+      totalAmount: totalAmount(),
+      packageIds,
+    }
+    console.log(allInformationsToPayment)
+    Api().post('payment', allInformationsToPayment)
+      .then(() => navigate('/result'))
+      .catch((err) => alert(err))
+
   };
-  const packageIds = packagesInBasket.map((item)=> String(item.id))
-  console.log(packageIds)
+
+
 
   return (
     <div className="basket">
       {packagesInBasket &&
-        packagesInBasket.map((packages,index) => (
+        packagesInBasket.map((packages, index) => (
           <div className="packageInTheBasket" key={index} >
             <Text>{packages.name}</Text>
             <Text strong>{packages.amount} ₺</Text>
